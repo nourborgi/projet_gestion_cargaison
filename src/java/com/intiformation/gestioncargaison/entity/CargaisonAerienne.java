@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -16,17 +17,27 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("aerienne")
+@XmlRootElement
 public class CargaisonAerienne extends Cargaison{
-    @Column(name = "Poids_max(Tonne)")
+    @Column(name = "Poids_max")
     private double poids_max;
 
     public CargaisonAerienne() {
     }
 
-    public CargaisonAerienne(double poids_max, long distance, Date date_livraison) {
-        super(distance, date_livraison);
+    public CargaisonAerienne(double poids_max, String reference, long distance, Date date_livraison) {
+        super(reference, distance, date_livraison);
         this.poids_max = poids_max;
     }
+
+    public CargaisonAerienne(double poids_max, int idCargaison, String reference, long distance, Date date_livraison) {
+        super(idCargaison, reference, distance, date_livraison);
+        this.poids_max = poids_max;
+    }
+
+   
+
+   
 
     public double getPoids_max() {
         return poids_max;

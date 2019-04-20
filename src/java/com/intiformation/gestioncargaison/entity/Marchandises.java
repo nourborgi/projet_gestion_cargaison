@@ -13,12 +13,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author IN-MP-007
  */
-@Entity
+
+@Entity(name = "marchandise")
+@Table(name = "marchandises")
+@XmlRootElement// annotation JAX_B pour le web service REST
 public class Marchandises implements Serializable{
     
     /*=======================================================================*/
@@ -27,10 +32,10 @@ public class Marchandises implements Serializable{
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      @Column(name = "numero")
-    private int numero;
+    private long numero;
      @Column(name = "nom")
     private String nom;
-     @Column(name = "poids(Tonne)")
+     @Column(name = "poids")
     private double poids;
      @Column(name = "volume")
     private double volume;
@@ -41,7 +46,7 @@ public class Marchandises implements Serializable{
     /*========================================================================*/
       @ManyToOne
     // coté porter de la clé FK => @JoinColumn
-    @JoinColumn(name = "cargaison_id", referencedColumnName = "reference")
+    @JoinColumn(name = "cargaison_id", referencedColumnName = "id_cargaison")
     private Cargaison cargaison;
       
 
@@ -77,7 +82,7 @@ public class Marchandises implements Serializable{
     /*========================== Encapsulation ===============================*/
     /*========================================================================*/
 
-    public int getNumero() {
+    public long getNumero() {
         return numero;
     }
 

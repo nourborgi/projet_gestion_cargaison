@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -42,8 +43,10 @@ public class Cargaison implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCargaison")
-    private int reference;
+    @Column(name = "id_cargaison")
+    private int idCargaison;
+    @Column(name = "reference")
+    private String reference;
     @Column(name = "distance")
     private long distance;
     @Column(name = "date_livraison")
@@ -57,6 +60,7 @@ public class Cargaison implements Serializable{
     @OneToMany(mappedBy = "cargaison", cascade = CascadeType.ALL)
     private List<Marchandises> marchandises;
 
+    @XmlTransient
     public List<Marchandises> getMarchandises() {
         return marchandises;
     }
@@ -72,26 +76,41 @@ public class Cargaison implements Serializable{
     public Cargaison() {
     }
 
-    public Cargaison(int reference, long distance, Date date_livraison) {
+    public Cargaison(String reference, long distance, Date date_livraison) {
         this.reference = reference;
         this.distance = distance;
         this.date_livraison = date_livraison;
     }
 
-    public Cargaison(long distance, Date date_livraison) {
+    public Cargaison(int idCargaison, String reference, long distance, Date date_livraison) {
+        this.idCargaison = idCargaison;
+        this.reference = reference;
         this.distance = distance;
         this.date_livraison = date_livraison;
+        
     }
+
+    
+
+    public int getIdCargaison() {
+        return idCargaison;
+    }
+
+    public void setIdCargaison(int idCargaison) {
+        this.idCargaison = idCargaison;
+    }
+
+    
     
     
     /*========================================================================*/
     /*========================== Encapsulation ===============================*/
     /*========================================================================*/
 
-    public int getReference() {
+    public String getReference() {
         return reference;
     }
-    public void setReference(int reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 
