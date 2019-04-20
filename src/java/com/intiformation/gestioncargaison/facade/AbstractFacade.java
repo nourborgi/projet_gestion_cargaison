@@ -22,7 +22,7 @@ public abstract class AbstractFacade<T> {
 
     /*__________________________ctor_____________________________*/
     /**
-     * ctor chargé pour initialiser l'netité
+     * ctor chargé pour initialiser l'entité
      *
      * @param entity
      */
